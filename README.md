@@ -1,11 +1,10 @@
 # yelp-dataset-challenge
 
-https://www.yelp.com/dataset/challenge
-
 <img src="https://github.com/Nov05/pictures/blob/master/yelp-dataset-challenge/2019-12-04%2014_07_10-Yelp%20Dataset.png?raw=true" width=700>
 
 **Round 13**   
-Our dataset has been updated for this iteration of the challenge - we’re sure there are plenty of interesting insights waiting there for you. This set includes information about local businesses in 10 metropolitan areas across 2 countries. Round 13 has kicked off starting January 15, 2019 and will run through December 31, 2019.
+Our dataset has been updated for this iteration of the challenge - we’re sure there are plenty of interesting insights waiting there for you. This set includes information about local businesses in 10 metropolitan areas across 2 countries. Round 13 has kicked off starting January 15, 2019 and will run through December 31, 2019.    
+https://www.yelp.com/dataset/challenge   
 
 **Dataset Documentation**  
 https://www.yelp.com/dataset/documentation/main
