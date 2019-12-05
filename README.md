@@ -1,4 +1,4 @@
-# yelp-dataset-challenge
+# Yelp Dataset Challenge
 
 <img src="https://github.com/Nov05/pictures/blob/master/yelp-dataset-challenge/2019-12-04%2014_07_10-Yelp%20Dataset.png?raw=true" width=700>
 
@@ -15,6 +15,6 @@ https://gist.github.com/Nov05/ac16f56e6312ea0c58fc6c91ad6a90f9
 3. Google Drive   
 https://drive.google.com/open?id=1PeZ62Kw35qXY1ZFUGDxX7wZEb4YdnEoC    
 
-# Logs  
+### Logs  
 2019-12-04 repo created   
 2019-12-05 Project Vision Document (presentation), exploratory data analysis     
