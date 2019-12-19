@@ -18,3 +18,4 @@ https://drive.google.com/open?id=1PeZ62Kw35qXY1ZFUGDxX7wZEb4YdnEoC
 ### Logs  
 2019-12-04 repo created   
 2019-12-05 Project Vision Document (presentation), exploratory data analysis     
+2019-12-18 Lambda School Slack tallyai-github-activity subscribed the repo   
