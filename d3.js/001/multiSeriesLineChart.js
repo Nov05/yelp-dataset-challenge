@@ -20,22 +20,26 @@ function multiSeriesLineChart(config) {
     setReSizeEvent(config);
 }
 
+// create legend
 function createmultiSeriesLineChartLegend(mainDiv, columnsInfo, colorRange) {
     var z = d3.scaleOrdinal()
         .range(colorRange);
     var mainDivName = mainDiv.substr(1, mainDiv.length);
+    // you can adjust legend width here: 
+    // e.g. $(mainDiv).width() * 0.25 
     $("#svg").after(
-        "<div id='legend' class='pmd-card-body' \
-style='margin-top:20; margin-bottom:0; width:" + $(mainDiv).width() * 0.1 + "; display:inline-block; \
-vertical-align:top)'></div>");
+        "<div id='legend' class='pmd-card-body' style='margin-top:20; margin-bottom:0;\
+width:" + $(mainDiv).width() * 0.25 + "; display:inline-block; vertical-align:top)'>\
+</div>");
     var keys = Object.keys(columnsInfo);
     keys.forEach(function (d) {
         var cloloCode = z(d);
         $("#legend").append(
-            "<span class='team-graph team1' style='display: inline-block; margin-right:0px;'>\
-<span style='background:" + cloloCode + "; width: 10px; height: 10px; display: inline-block; vertical-align: middle;'>&nbsp;</span>\
-<span style='padding-top: 0; font-family: Source Sans Pro, sans-serif; font-size: 13px; display: inline;'>" + columnsInfo[d] + " </span>\
-</span>");
+            "<span class='team-graph team1' style='display: block; margin-right:0px;'>\
+<span style='background:" + cloloCode + "; width: 10px; height: 10px;\
+display: inline-block; vertical-align: middle;'>&nbsp;</span>\
+<span style='padding-top: 0; font-family: Source Sans Pro, sans-serif;\
+font-size: 13px; display: inline;'>" + columnsInfo[d] + " </span></span>");
     });
 }
 
@@ -56,14 +60,17 @@ function drawmultiSeriesLineChartCharts(config) {
     var label = config.label;
     var requireCircle = config.requireCircle || false;
     var requireLegend = config.requireLegend;
+    // you can change the svg to main div width percentage here
+    var svgWidthPercentage = 0.75
     // var imageData = config.imageData;
-    d3.select(mainDiv).style('display', 'inline-block')
-        .style('vertical-align', 'top')
-        .append('div').attr('id', 'svg')
-        .attr("width", $(mainDiv).width() * 0.85)
+    d3.select(mainDiv)
         .style('display', 'inline-block')
         .style('vertical-align', 'top')
-        .append("svg").attr("width", $(mainDiv).width() * 0.85)
+        .append('div').attr('id', 'svg')
+        .attr("width", $(mainDiv).width() * svgWidthPercentage)
+        .style('display', 'inline-block')
+        .style('vertical-align', 'top')
+        .append("svg").attr("width", $(mainDiv).width() * svgWidthPercentage)
         .attr("height", $(mainDiv).height() * 0.95)
         ;
     var svg = d3.select(mainDiv + " svg"),
@@ -121,30 +128,34 @@ function drawmultiSeriesLineChartCharts(config) {
         return c.id;
     }));
 
+    // x-axis
     g.append("g")
         .attr("class", "axis axis--x")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x))
         .append("text")
-        .attr("x", width / 2)
-        .attr("y", margin.bottom * 0.9)
+        .attr("x", width)
+        .attr("y", margin.bottom * -0.2)
+        .attr("text-anchor", "end")
         .attr("dx", "0.32em")
         .attr("fill", "#000")
         .attr("font-weight", "bold")
-        .attr("text-anchor", "start")
-        .text(label.xAxis);
-
+        .text(label.xAxis)
+        .style("font-size","15px");
+    
+    // y-axis
     g.append("g")
         .attr("class", "axis axis--y")
         .call(d3.axisLeft(y))
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
+        .attr("text-anchor", "end")
         .attr("dy", "0.71em")
         .attr("fill", "#000")
         .attr("font-weight", "bold")
-        .text(label.yAxis);
-
+        .text(label.yAxis)
+        .style("font-size","15px");
 
     var city = g.selectAll(".city")
         .data(groupData)
@@ -263,7 +274,7 @@ function drawmultiSeriesLineChartCharts(config) {
             // adjust hover text horizontal position here
             // if text-anchor: end, .attr("x", dims.w + 4)
             // if text-anchor: start, .attr("x", dims.w -42)
-            .attr("x", dims.w - 42); 
+            .attr("x", dims.w - 42);
 
         d3.selectAll("#circletooltipRect_" + mainDivName)
             .attr("width", dims.w + 10)
@@ -279,7 +290,7 @@ function drawmultiSeriesLineChartCharts(config) {
                 var xCo = 0;
                 if (mouseCoords[0] + 10 >= width * 0.80) {
                     xCo = mouseCoords[0] - parseFloat(d3.selectAll("#circletooltipRect_" + mainDivName)
-                                                        .attr("width"));
+                        .attr("width"));
                 } else {
                     xCo = mouseCoords[0] + 10;
                 }
@@ -359,6 +370,6 @@ var helpers = {
         } else {
             console.log("error: getDimensions() " + id + " not found.");
         }
-        return {w: w, h: h};
+        return { w: w, h: h };
     }
 };
