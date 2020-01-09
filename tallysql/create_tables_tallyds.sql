@@ -47,3 +47,11 @@ text VARCHAR,
 timestamp TIMESTAMP WITH TIME ZONE,
 PRIMARY KEY (uuid)
 );
+
+create table tallyds.ds_trendyphrase (
+	business_id VARCHAR,
+	datetime TIMESTAMP WITHOUT TIME ZONE,
+	rank float8,
+	keywords varchar,
+	primary key (business_id)
+);
