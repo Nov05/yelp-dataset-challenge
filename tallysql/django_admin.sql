@@ -11,8 +11,13 @@ tallyds.django_migrations,
 tallyds.django_session
 TO spotifier;
 
-grant all on all tables 
-in schema tallyds, tallyweb, tallyjob, lab, django
-to spotifier;
+-- grant all on all tables 
+-- in schema tallyds, tallyweb, tallyjob, lab, django
+-- to spotifier;
 
 -- GRANT ALL PRIVILEGES ON DATABASE test to spotifier;
+
+grant all on all tables in schema django to spotifier;
+
+
+
