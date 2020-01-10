@@ -48,10 +48,20 @@ timestamp TIMESTAMP WITH TIME ZONE,
 PRIMARY KEY (uuid)
 );
 
-create table tallyds.ds_trendyphrase (
+create table tallyjob.job_log (
+	uuid UUID DEFAULT uuid_generate_v4(),
+	business_id varchar,
+	job_type smallint,
+	timestamp TIMESTAMP WITH TIME ZONE,
+	primary key (uuid)
+);
+
+create table tallyjob.ds_trendyphrase (
+	uuid UUID DEFAULT uuid_generate_v4(),
 	business_id VARCHAR,
+	timestamp TIMESTAMP WITH TIME ZONE,
 	datetime TIMESTAMP WITHOUT TIME ZONE,
-	rank float8,
 	keywords varchar,
-	primary key (business_id)
+	rank float8,
+	primary key (uuid)
 );
