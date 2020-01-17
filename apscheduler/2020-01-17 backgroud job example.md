@@ -1,5 +1,6 @@
 
-# Advanced Python Scheduler Background Job Scheduling Example 
+# Advanced Python Scheduler 
+### Background Job Scheduling Example 
 
 On you local machine, start the Django server.    
 In the browser, enter the following URL.   
