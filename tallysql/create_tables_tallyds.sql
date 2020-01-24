@@ -1,7 +1,7 @@
 -- to simply this project, i didn't create any foreign key constraints.
 -- i hope you will figure them out by yourself.
 
-CREATE TABLE tallyds.business (
+CREATE TABLE tallyds.yelp_business (
 	business_id VARCHAR,
 	alias VARCHAR,
 	name VARCHAR,
@@ -22,8 +22,7 @@ CREATE TABLE tallyds.business (
 	PRIMARY KEY (business_id)
 );
 
-CREATE TABLE tallyds.review (
-	uuid UUID DEFAULT uuid_generate_v4(),
+CREATE TABLE tallyds.yelp_review (
 	review_id VARCHAR,
 	business_id VARCHAR,
 	user_id VARCHAR,
@@ -33,12 +32,29 @@ CREATE TABLE tallyds.review (
 	time TIME WITHOUT TIME ZONE,
 	text VARCHAR,
 	timestamp TIMESTAMP WITH TIME ZONE,
-	data_source SMALLINT,
-	PRIMARY KEY (uuid)
+	PRIMARY KEY (review_id)
 );
 
-CREATE TABLE tallyds.yelp_scraping (
+-- idx_allreviewlog (business_id, data_source, timestamp desc)
+create table tallyds.yelp_review_log (
 	uuid UUID DEFAULT uuid_generate_v4(),
+	business_id VARCHAR,
+	date date,
+	timestamp timestamp with time zone,
+	primary key (uuid)
+);
+
+-- primary key index
+-- index on (business_id, timestamp desc)
+CREATE TABLE tallyds.tally_business (
+	business_id VARCHAR,
+	timestamp TIMESTAMP WITH TIME ZONE,
+	PRIMARY KEY (business_id)
+);
+
+-- primary key index
+-- index on (business_id, datetime)
+CREATE TABLE tallyds.yelp_review (
 	review_id VARCHAR,
 	business_id VARCHAR,
 	user_id VARCHAR,
@@ -48,24 +64,26 @@ CREATE TABLE tallyds.yelp_scraping (
 	time TIME WITHOUT TIME ZONE,
 	text VARCHAR,
 	timestamp TIMESTAMP WITH TIME ZONE,
-	PRIMARY KEY (uuid)
+	PRIMARY KEY (review_id)
 );
 
-CREATE TABLE tallyds.ds_vizstatus (
-	business_id VARCHAR, -- primary key 
-	viztype SMALLINT, -- primary key 
+-- index: business_id, viztype, timestamp desc
+CREATE TABLE tallyds.ds_vizdata_log (
+	uuid UUID DEFAULT uuid_generate_v4(), -- primary key
+	business_id VARCHAR, 
+	viztype SMALLINT, 
 	timestamp TIMESTAMP WITH TIME ZONE,
 	triggeredby SMALLINT, -- 0: user, 1: job
-	PRIMARY KEY (business_id, viztype)
+	PRIMARY KEY (uuid)
 );
 
+-- index: business_id, viztype, timestamp desc
 CREATE TABLE tallyds.ds_vizdata (
-	uuid UUID DEFAULT uuid_generate_v4(), -- primary key
-	business_id VARCHAR,
+	business_id VARCHAR, -- primary key
+	viztype SMALLINT, -- primary key
 	timestamp TIMESTAMP WITH TIME ZONE,
-	viztype SMALLINT,
 	vizdata VARCHAR,
-	PRIMARY KEY (uuid)
+	PRIMARY KEY (business_id, viztype)
 );
 
 CREATE TABLE tallyds.job_config (
@@ -77,11 +95,14 @@ CREATE TABLE tallyds.job_config (
 	PRIMARY KEY (job_type)
 );
 
-CREATE TABLE tallyds.job_logs (
+-- index on (business_id, job_type, job_status, timestamp)
+CREATE TABLE tallyds.job_log (
 	uuid UUID DEFAULT uuid_generate_v4(), -- primary key
 	business_id VARCHAR,
 	job_type SMALLINT,
 	job_status SMALLINT, -- 0: failed, 1: succeeded
-	timestamp TIMESTAMP WITH TIME ZONE
+	timestamp TIMESTAMP WITH TIME ZONE,
+	job_message VARCHAR,
+	primary key (uuid)
 );
 

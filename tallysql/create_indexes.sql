@@ -1,11 +1,7 @@
--- CREATE INDEX idx_review ON tallyds.review (business_id, datetime DESC);
--- create index idx_vizdata on tallyds.ds_vizdata (business_id, timestamp DESC);
--- create index idx_logs on tallyds.job_logs (business_id, timestamp DESC);
-
--- select * from tallyds.review 
--- where business_id = 'Iq7NqQD-sESu3vr9iEGuTA'
--- and datetime <= '2018-11-30'
--- and datetime >= '2017-11-30';
-
--- select * from tallyds.business
--- where alias = 'aunt-jakes-new-york';
+CREATE INDEX idx_yelpreview ON tallyds.yelp_review (business_id, datetime DESC);
+create index idx_yelpreviewlog on tallyds.yelp_review_log (business_id, timestamp desc);
+create index idx_yelpreivew on tallyds.yelp_review (business_id, datetime desc);
+create index idx_joblog on tallyds.job_log (business_id, job_type, job_status, timestamp desc);
+create index idx_vizdata on tallyds.ds_vizdata (business_id, viztype, timestamp DESC);
+create index idx_vizdatalog on tallyds.ds_vizdata_log (business_id, viztype, timestamp DESC);
+create index idx_tallybusiness on tallyds.tally_business (business_id, timestamp desc);

@@ -1,4 +1,0 @@
-CREATE TABLE tallyds.tally_user_businesses (
-   uuid type 
-   table_constraint table_constraint
-)
