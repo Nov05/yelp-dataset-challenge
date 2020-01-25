@@ -18,7 +18,6 @@ CREATE TABLE tallyds.yelp_business (
 	display_phone VARCHAR,
 	price VARCHAR,
 	timestamp TIMESTAMP WITH TIME ZONE,
-	data_source SMALLINT,
 	PRIMARY KEY (business_id)
 );
 
